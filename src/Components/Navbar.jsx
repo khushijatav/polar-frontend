@@ -1,10 +1,12 @@
-import { Link, useLocation } from "react-router-dom";
-import Logo from "../Components/Logo";
+import { NavLink, Link } from "react-router-dom";
+import {
+  Snowflake,
+  LogIn,
+  LayoutDashboard,
+} from "lucide-react";
 
 const Navbar = () => {
-  const location = useLocation();
-
-  const links = [
+  const navItems = [
     {
       name: "Home",
       path: "/",
@@ -24,49 +26,195 @@ const Navbar = () => {
   ];
 
   return (
-    <header className="absolute left-0 right-0 top-0 z-50 px-6 pt-5">
-      <nav className="flex h-16 w-full items-center justify-between rounded-2xl border border-slate-200 bg-white/90 px-6 shadow-lg backdrop-blur-xl">
-
-        {/* Logo */}
-        <Logo />
-
-        {/* Navigation */}
-        <div className="hidden items-center gap-8 md:flex">
-
-          {links.map((link) => {
-            const active = location.pathname === link.path;
-
-            return (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`relative px-2 py-2 text-sm font-semibold transition duration-300 ${
-                  active
-                    ? "text-slate-950"
-                    : "text-slate-500 hover:text-slate-950"
-                }`}
-              >
-                {link.name}
-
-                {/* Active underline */}
-                {active && (
-                  <span className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-cyan-400" />
-                )}
-              </Link>
-            );
-          })}
-
-        </div>
-
-        {/* Command Center */}
+    <header
+      className="
+        fixed
+        inset-x-0
+        top-0
+        z-[9999]
+        h-20
+        border-b
+        border-white/10
+        bg-slate-950/95
+        backdrop-blur-xl
+      "
+    >
+      <div
+        className="
+          mx-auto
+          flex
+          h-full
+          max-w-7xl
+          items-center
+          justify-between
+          px-5
+          sm:px-8
+          lg:px-10
+        "
+      >
+        {/* ================= LOGO ================= */}
         <Link
-          to="/login"
-          className="rounded-xl bg-slate-950 px-5 py-3 text-sm font-bold text-white transition duration-300 hover:-translate-y-0.5 hover:bg-cyan-500 hover:text-slate-950"
+          to="/"
+          className="flex items-center gap-3"
         >
-          Command Center
+          <div
+            className="
+              flex
+              h-10
+              w-10
+              shrink-0
+              items-center
+              justify-center
+              rounded-xl
+              border
+              border-cyan-400/30
+              bg-cyan-400/10
+            "
+          >
+            <Snowflake
+              size={21}
+              strokeWidth={1.8}
+              className="text-cyan-400"
+            />
+          </div>
+
+          <div className="leading-none">
+            <h1
+              className="
+                text-base
+                font-black
+                tracking-[0.2em]
+                text-white
+              "
+            >
+              POLARIS
+            </h1>
+
+            <p
+              className="
+                mt-1
+                text-[9px]
+                font-medium
+                uppercase
+                tracking-[0.18em]
+                text-slate-500
+              "
+            >
+              Expedition Command
+            </p>
+          </div>
         </Link>
 
-      </nav>
+        {/* ================= NAVIGATION ================= */}
+        <nav className="hidden items-center gap-8 md:flex">
+          {navItems.map((item) => (
+            <NavLink
+              key={item.path}
+              to={item.path}
+              className={({ isActive }) =>
+                `
+                group
+                relative
+                py-2
+                text-sm
+                font-medium
+                transition-all
+                duration-300
+                ${
+                  isActive
+                    ? "text-cyan-400"
+                    : "text-slate-400 hover:text-white"
+                }
+                `
+              }
+            >
+              {({ isActive }) => (
+                <>
+                  {item.name}
+
+                  {/* Active underline */}
+                  <span
+                    className={`
+                      absolute
+                      -bottom-1
+                      left-0
+                      h-[2px]
+                      rounded-full
+                      bg-cyan-400
+                      transition-all
+                      duration-300
+                      ${
+                        isActive
+                          ? "w-full opacity-100"
+                          : "w-0 opacity-0 group-hover:w-full group-hover:opacity-100"
+                      }
+                    `}
+                  />
+                </>
+              )}
+            </NavLink>
+          ))}
+        </nav>
+
+        {/* ================= RIGHT BUTTONS ================= */}
+        <div className="flex items-center gap-3">
+          {/* Sign In */}
+          <Link
+            to="/login"
+            className="
+              hidden
+              items-center
+              gap-2
+              text-sm
+              font-medium
+              text-slate-400
+              transition
+              duration-300
+              hover:text-white
+              sm:flex
+            "
+          >
+            <LogIn size={16} />
+            <span>Sign In</span>
+          </Link>
+
+          {/* Command Center */}
+          <Link
+            to="/dashboard"
+            className="
+              flex
+              items-center
+              gap-2
+              rounded-xl
+              border
+              border-cyan-300/20
+              bg-cyan-400
+              px-4
+              py-2.5
+              text-xs
+              font-bold
+              text-slate-950
+              shadow-lg
+              shadow-cyan-500/10
+              transition-all
+              duration-300
+              hover:-translate-y-0.5
+              hover:bg-cyan-300
+              hover:shadow-cyan-400/20
+            "
+          >
+            <LayoutDashboard size={15} />
+
+            <span className="hidden sm:inline">
+              Command Center
+            </span>
+
+            <span className="sm:hidden">
+              Command
+            </span>
+          </Link>
+        </div>
+      </div>
     </header>
   );
 };

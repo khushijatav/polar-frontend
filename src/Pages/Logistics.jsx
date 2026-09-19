@@ -1,81 +1,96 @@
-
 import {
-  Anchor,
-  ArrowRight,
-  Package,
   Ship,
+  Package,
+  MapPin,
+  Clock,
+  ArrowRight,
 } from "lucide-react";
 
-import Navbar from "../Components/Navbar";
+import PageLayout from "../Components/PageLayout";
+import SectionTitle from "../ui/SectionTitle";
 
 const Logistics = () => {
   return (
-    <div className="page-background min-h-screen">
+    <PageLayout>
 
-      <Navbar />
+      <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-10">
 
-      <main className="mx-auto max-w-6xl px-6 pb-16 pt-32">
-
-        <p className="text-xs font-bold uppercase tracking-widest text-cyan-600">
-          Polar Transportation
-        </p>
-
-        <h1 className="mt-4 text-5xl font-black text-slate-950">
-          From port to
-          <span className="text-cyan-500">
-            polar base.
-          </span>
-        </h1>
-
-        <p className="mt-5 max-w-2xl text-base leading-7 text-slate-500">
-          Manage cargo ships, shipments and resource
-          movement through one connected logistics workflow.
-        </p>
+        <SectionTitle
+          eyebrow="Polar Logistics"
+          title="From port"
+          highlight="to polar base."
+          description="Coordinate cargo movement, transportation and delivery through a single logistics workflow."
+        />
 
 
-        <div className="mt-12 grid items-center gap-5 md:grid-cols-3">
+        <div className="mt-16 grid gap-5 lg:grid-cols-3">
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
+          {/* Ship */}
+          <div className="rounded-2xl border border-white/10 bg-slate-900 p-7">
 
             <Ship
-              size={26}
-              className="text-cyan-500"
-            />
-
-            <h2 className="mt-5 text-xl font-bold">
-              Cargo Ship
-            </h2>
-
-            <p className="mt-2 text-sm text-slate-500">
-              Track ship status, destination and ETA.
-            </p>
-
-          </div>
-
-
-          <div className="flex justify-center">
-
-            <ArrowRight
               size={28}
-              className="hidden text-cyan-500 md:block"
+              className="text-cyan-400"
             />
+
+            <p className="mt-6 text-xs uppercase tracking-widest text-slate-500">
+              Origin
+            </p>
+
+            <h3 className="mt-2 text-2xl font-bold">
+              Cargo Ship
+            </h3>
+
+            <p className="mt-3 text-sm leading-6 text-slate-400">
+              Manage ship information, cargo allocation,
+              departure and destination.
+            </p>
 
           </div>
 
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
+          {/* Flow */}
+          <div className="flex items-center justify-center rounded-2xl border border-cyan-400/20 bg-cyan-400/5 p-7">
 
-            <Anchor
-              size={26}
-              className="text-cyan-500"
+            <div className="text-center">
+
+              <ArrowRight
+                size={35}
+                className="mx-auto text-cyan-400"
+              />
+
+              <p className="mt-4 text-xs uppercase tracking-widest text-cyan-400">
+                Logistics Flow
+              </p>
+
+              <p className="mt-2 text-sm text-slate-400">
+                Cargo → Transport → Delivery
+              </p>
+
+            </div>
+
+          </div>
+
+
+          {/* Base */}
+          <div className="rounded-2xl border border-white/10 bg-slate-900 p-7">
+
+            <MapPin
+              size={28}
+              className="text-cyan-400"
             />
 
-            <h2 className="mt-5 text-xl font-bold">
-              Polar Base
-            </h2>
+            <p className="mt-6 text-xs uppercase tracking-widest text-slate-500">
+              Destination
+            </p>
 
-            <p className="mt-2 text-sm text-slate-500">
-              Receive and distribute expedition resources.
+            <h3 className="mt-2 text-2xl font-bold">
+              Polar Base
+            </h3>
+
+            <p className="mt-3 text-sm leading-6 text-slate-400">
+              Receive cargo and update inventory after
+              successful delivery.
             </p>
 
           </div>
@@ -83,34 +98,50 @@ const Logistics = () => {
         </div>
 
 
-        <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
+        {/* Status */}
+        <div className="mt-6 grid gap-5 md:grid-cols-3">
 
-          <div className="flex items-center gap-4">
+          <div className="rounded-2xl border border-white/10 bg-slate-900 p-6">
+            <Package className="text-cyan-400" />
 
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-cyan-50">
-              <Package
-                size={20}
-                className="text-cyan-600"
-              />
-            </div>
+            <p className="mt-4 text-2xl font-black">
+              186
+            </p>
 
-            <div>
-              <h3 className="font-bold text-slate-900">
-                Cargo Flow
-              </h3>
+            <p className="text-sm text-slate-500">
+              Active Cargo Items
+            </p>
+          </div>
 
-              <p className="mt-1 text-sm text-slate-500">
-                Cargo Ship → Cargo → Polar Base → Inventory
-              </p>
-            </div>
+          <div className="rounded-2xl border border-white/10 bg-slate-900 p-6">
+            <Ship className="text-cyan-400" />
 
+            <p className="mt-4 text-2xl font-black">
+              03
+            </p>
+
+            <p className="text-sm text-slate-500">
+              Active Ships
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-white/10 bg-slate-900 p-6">
+            <Clock className="text-cyan-400" />
+
+            <p className="mt-4 text-2xl font-black">
+              05
+            </p>
+
+            <p className="text-sm text-slate-500">
+              Deliveries In Transit
+            </p>
           </div>
 
         </div>
 
-      </main>
+      </div>
 
-    </div>
+    </PageLayout>
   );
 };
 

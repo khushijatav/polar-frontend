@@ -1,4 +1,15 @@
-import Navbar from "../Components/Navbar";
+import {
+  ClipboardCheck,
+  PackageCheck,
+  Truck,
+  MapPin,
+  Wrench,
+  CheckCircle2,
+  ArrowDown,
+} from "lucide-react";
+
+import PageLayout from "../Components/PageLayout";
+import SectionTitle from "../ui/SectionTitle";
 
 const HowItWorks = () => {
   const steps = [
@@ -6,91 +17,113 @@ const HowItWorks = () => {
       number: "01",
       title: "Plan",
       description:
-        "Create expedition details, assign objectives and prepare resources.",
+        "Create the expedition, define objectives, team requirements and operational timeline.",
+      icon: ClipboardCheck,
     },
     {
       number: "02",
       title: "Equip",
       description:
-        "Assign teams, assets, inventory and required equipment.",
+        "Assign assets, equipment and inventory required for the mission.",
+      icon: PackageCheck,
     },
     {
       number: "03",
       title: "Transport",
       description:
-        "Coordinate cargo ships, vehicles and movement of resources.",
+        "Coordinate cargo ships, vehicles, shipments and delivery schedules.",
+      icon: Truck,
     },
     {
       number: "04",
       title: "Track",
       description:
-        "Monitor locations, operational status and expedition progress.",
+        "Monitor locations, assets, team activity and logistics status.",
+      icon: MapPin,
     },
     {
       number: "05",
       title: "Maintain",
       description:
-        "Monitor equipment condition and schedule maintenance activities.",
+        "Track equipment condition and schedule required maintenance.",
+      icon: Wrench,
     },
     {
       number: "06",
       title: "Complete",
       description:
-        "Review expedition performance and generate operational reports.",
+        "Review mission performance, resources and generate final reports.",
+      icon: CheckCircle2,
     },
   ];
 
   return (
-    <div className="page-background min-h-screen">
+    <PageLayout>
 
-      <Navbar />
+      <div className="mx-auto max-w-5xl px-5 py-20 sm:px-8">
 
-      <main className="mx-auto max-w-6xl px-6 pb-16 pt-32">
+        <SectionTitle
+          eyebrow="Mission Workflow"
+          title="From planning"
+          highlight="to completion."
+          description="A structured operational workflow keeps every part of a polar expedition connected."
+        />
 
-        <div className="text-center">
 
-          <p className="text-xs font-bold uppercase tracking-widest text-cyan-600">
-            Expedition Workflow
-          </p>
+        <div className="mt-16">
 
-          <h1 className="mt-4 text-5xl font-black text-slate-950">
-            From planning to
-            <span className="text-cyan-500">
-              completion.
-            </span>
-          </h1>
+          {steps.map((step, index) => {
+            const Icon = step.icon;
+
+            return (
+              <div key={step.number}>
+
+                <div className="flex items-center gap-6 rounded-2xl border border-white/10 bg-slate-900/70 p-6 transition hover:border-cyan-400/30">
+
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-cyan-400/10 text-cyan-400">
+                    <Icon size={24} />
+                  </div>
+
+                  <div className="flex-1">
+
+                    <div className="flex items-center gap-3">
+
+                      <span className="text-xs font-bold text-cyan-400">
+                        {step.number}
+                      </span>
+
+                      <h3 className="text-xl font-bold text-white">
+                        {step.title}
+                      </h3>
+
+                    </div>
+
+                    <p className="mt-2 text-sm leading-6 text-slate-400">
+                      {step.description}
+                    </p>
+
+                  </div>
+
+                </div>
+
+                {index !== steps.length - 1 && (
+                  <div className="flex justify-center py-3">
+                    <ArrowDown
+                      size={18}
+                      className="text-cyan-400/40"
+                    />
+                  </div>
+                )}
+
+              </div>
+            );
+          })}
 
         </div>
 
+      </div>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-
-          {steps.map((step) => (
-            <div
-              key={step.number}
-              className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
-            >
-
-              <span className="text-sm font-black text-cyan-500">
-                {step.number}
-              </span>
-
-              <h2 className="mt-5 text-xl font-bold text-slate-900">
-                {step.title}
-              </h2>
-
-              <p className="mt-3 text-sm leading-6 text-slate-500">
-                {step.description}
-              </p>
-
-            </div>
-          ))}
-
-        </div>
-
-      </main>
-
-    </div>
+    </PageLayout>
   );
 };
 

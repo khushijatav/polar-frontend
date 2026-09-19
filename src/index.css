@@ -14,6 +14,7 @@ body {
   min-width: 320px;
   background: #020617;
   color: white;
+
   font-family:
     Inter,
     ui-sans-serif,
@@ -22,7 +23,9 @@ body {
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
+
   overflow-x: hidden;
+
   -webkit-font-smoothing: antialiased;
 }
 
